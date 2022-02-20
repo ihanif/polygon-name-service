@@ -30,7 +30,7 @@ contract Domains is ERC721URIStorage {
 
     constructor(string memory _tld)
         payable
-        ERC721("Ninja Name Service", "NNS")
+        ERC721("Stack Name Service", "SNS")
     {
         tld = _tld;
         console.log("%s name service deployed", _tld);
