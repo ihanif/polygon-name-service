@@ -49,6 +49,28 @@ const main = async () => {
     "Balance of owner after withdrawal:",
     hre.ethers.utils.formatEther(ownerBalance)
   );
+
+  // try invalid domain name
+  txn = await domainContract.register(
+    "AVerylongDomainNameThatIsMoreThanTenChars",
+    {
+      value: hre.ethers.utils.parseEther("0.1"),
+    }
+  );
+  await txn.wait();
+
+  // try a valid domain name
+  txn = await domainContract.register("newstack", {
+    value: hre.ethers.utils.parseEther("0.1"),
+  });
+  await txn.wait();
+  console.log("Valid domain registered");
+
+  // register a valid domain name twice
+  txn = await domainContract.register("newstack", {
+    value: hre.ethers.utils.parseEther("0.1"),
+  });
+  await txn.wait();
 };
 
 const runMain = async () => {
